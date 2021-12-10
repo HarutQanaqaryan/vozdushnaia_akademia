@@ -13,13 +13,7 @@ const Navbar = () => {
     <div className="navbar">
       <div className="navbar-wrapper">
         <h1 className="navbar-title">ВОЗДУШНАЯ АКАДЕМИЯ</h1>
-        <span className="navbar-contact">
-          <span className="navbar-contact_title">Позвонить</span><a href="tel:+79803441988" className="navbar-contact_tel">
-            <Image src={phone} alt="" width="60px" />
-          </a>
-        </span>
-      </div>
-      <div className="navbar-menu">
+        <div className="navbar-menu">
         {menuItems.map(({ text, href }) => {
           return (
             <Link href={href} key={href}>
@@ -28,6 +22,14 @@ const Navbar = () => {
           );
         })}
       </div>
+        <div className="navbar-contact">
+          <a href="tel:+79803441988" className="navbar-contacts_tel_icon">
+            <Image src={phone} alt="" width="30px" height="30px"/>
+          </a>
+          <div className="navbar-contacts_tel">+7 (980) 344 19-88</div>
+        </div>
+      </div>
+      
     </div>
   );
 };

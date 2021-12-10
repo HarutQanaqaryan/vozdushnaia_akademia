@@ -3,7 +3,7 @@ import Slider from "../components/slide";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="home-page">
       <Slider />
       <ChooseUs />
     </div>
