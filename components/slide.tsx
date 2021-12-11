@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import slide1 from "../img/slide1.jpg";
 import slide3 from "../img/slide3.jpg";
 import slide4 from "../img/slide4.jpg";
@@ -42,6 +43,11 @@ const Slider = () => {
       <div className="slider_title">
         В жизни каждого человека есть 100500 поводов для праздника и каждый из
         них мы готовы сделать ярким и незабываемым!
+      </div>
+      <div className="slider_btn">
+        <Link href="/catalog">
+          <a className="slider_btn_catalog">Каталог</a>
+        </Link>
       </div>
     </div>
   );

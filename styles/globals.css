@@ -113,6 +113,31 @@ body {
   color: rgb(2,139,81);
   font-family: "Poiret One", cursive;
 }
+.slider_btn {
+  position: absolute;
+  top: 80%;
+  left: 45%;
+}
+.slider_btn_catalog {
+ font-size: 20px;
+ color: rgb(255, 255, 255);
+ background-color: rgb(2,139,81);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ width: 160px;
+ height: 30px;
+ text-decoration: none;
+ font-family: "Montserrat Alternates", sans-serif;
+ font-size: 16px;
+ font-weight: 600;
+ border-radius: 6px;
+}
+.slider_btn_catalog:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.183);
+  transition: .1s;
+}
 .chooseus {
   display: flex;
   align-items: center;
@@ -169,4 +194,83 @@ body {
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
   transition: .1s;
+}
+.feedback-form-block {
+  width: 400px;
+  min-height: 650px;
+  margin: auto;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  padding-bottom: 20px;
+}
+.feedback-block_form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.feedback-form_label {
+  display: flex;
+  justify-content: center;
+}
+.feedback-form_title {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 18px;
+  color: rgb(2,139,81);
+}
+.feedback-form_label {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 18px;
+  color: rgb(2,139,81);
+  margin: 10px;
+}
+.feedback-form_input {
+  width: 250px;
+  height: 40px;
+  font-size: 20px;
+  font-family: "Poiret One", cursive;
+  color: rgb(2,139,81);
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  border-radius: 4px;
+  font-weight: 700;
+  margin: 20px;
+}
+.feedback-form_input:focus {
+  outline: none;
+  background-color: rgba(2, 139, 82, 0.782);
+  color: rgb(253, 253, 253);
+}
+.feedback-form_btn {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  color: rgb(2,139,81);
+  border:none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  cursor: pointer;
+  margin-top: 30px;
+}
+.feedback-form_btn:hover {
+  background-color: rgb(255,255,255);
+  transition: 1s;
+}
+.validation-hint, .feedback-delivered_block {
+  font-size: 16px;
+  margin: 0;
+  color: rgb(162, 6, 6);
+  font-family: "Montserrat Alternates", sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  padding: 8px;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  font-weight: 600;
+}
+.feedback-delivered_block {
+  color: rgb(2,139,81);
+  margin-top: 20px;
 }
