@@ -1,0 +1,21 @@
+.footer {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+.footer_feedback{
+    width: 200px;
+    height: 70px;
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.footer_feedback_icons {
+  padding: 8px;
+}
+.footer_feedback_icons:hover {
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  transition: .1s;
+}

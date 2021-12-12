@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import FeedbackForm from "./feedback";
 import slide1 from "../img/slide1.jpg";
 import slide3 from "../img/slide3.jpg";
 import slide4 from "../img/slide4.jpg";
@@ -13,7 +13,7 @@ const img = [
   <Image key={5} src={slide5} alt="Slider Image" />,
 ];
 
-const Slider = () => {
+const Slider = ({onClick}) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -30,7 +30,8 @@ const Slider = () => {
   const nextImgIndex = activeIndex === img.length - 1 ? 0 : activeIndex + 1;
 
   return (
-    <div className="slider">
+    <div className="slider" >
+      <div className="slider_imgs">
       <div className="slider-img slider-img-prev" key={prevImgIndex}>
         {img[prevImgIndex]}
       </div>
@@ -40,14 +41,13 @@ const Slider = () => {
       <div className="slider-img slider-img-next" key={nextImgIndex}>
         {img[nextImgIndex]}
       </div>
+      </div>
       <div className="slider_title">
         В жизни каждого человека есть 100500 поводов для праздника и каждый из
         них мы готовы сделать ярким и незабываемым!
       </div>
-      <div className="slider_btn">
-        <Link href="/catalog">
-          <a className="slider_btn_catalog">Каталог</a>
-        </Link>
+      <div className="slider_btn-block">
+        <button onClick={onClick} className="slider_btn">Заказать звонок</button>
       </div>
     </div>
   );
