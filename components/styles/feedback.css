@@ -14,8 +14,8 @@
     margin-bottom: 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
     padding-bottom: 20px;
+    transition: all 2s linear;
   }
-  
   .feedback-block_form {
     display: flex;
     justify-content: center;
@@ -83,14 +83,30 @@
     display: flex;
     justify-content:space-around;
     align-items: center;
-    font-weight: 600;
-    transition: 1s;
   }
-  .feedback-delivered_block {
+  .feedback-delivered_block, .feedback-failed_block {
     color: rgb(2,139,81);
-    margin-top: 20px;
-  }
 
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 99;
+    width: 500px;
+    height: 150px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.598);
+    padding-bottom: 20px;
+    font-size: 25px;
+  }
+  .feedback-failed_block {
+     font-size: 25px;
+     display: flex;
+     align-items: center;
+     text-align: center;
+     justify-content: center;
+     font-family: "Montserrat Alternates", sans-serif;
+  }
   @media screen and (max-width: 800px){
     .feedback-form-block {
       width: 220px;
@@ -103,5 +119,10 @@
     }
     .feedback-form_btn {
       font-size: 14px;
+    }
+    .feedback-delivered_block {
+      width: 300px;
+      height: 100px;
+      font-size: 20px;
     }
   }
