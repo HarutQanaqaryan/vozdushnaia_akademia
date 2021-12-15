@@ -1,128 +1,145 @@
 .feedback-form-block {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: beige;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 99;
-    width: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 99;
+  width: 350px;
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  padding-bottom: 20px;
+  transition: all 2s linear;
+}
+.feedback_modal_opened:before {
+	content: '';
+	background: rgba(0, 0, 0, 0.483);
+	position: fixed; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	opacity: 0.7;
+	z-index: 1;
+  overflow: hidden;
+}
+.feedback-block_form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.feedback-form_title {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 18px;
+  color: rgb(2, 139, 81);
+}
+.feedback-form_close {
+  margin-left: auto;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.feedback-form_label {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-size: 18px;
+  color: rgb(2, 139, 81);
+  margin: 10px;
+}
+.feedback-form_input {
+  width: 250px;
+  height: 40px;
+  font-size: 18px;
+  font-family: "Montserrat Alternates", sans-serif;
+  color: rgb(2, 139, 81);
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  border-radius: 4px;
+  font-weight: 700;
+  margin: 20px;
+}
+.feedback-form_input:focus {
+  outline: none;
+  background-color: rgba(2, 139, 82, 0.782);
+  color: rgb(253, 253, 253);
+}
+.feedback-form_btn {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  color: rgb(2, 139, 81);
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.feedback-form_btn:hover {
+  background-color: rgb(255, 255, 255);
+  transition: 1s;
+}
+.validation-hint,
+.feedback-delivered_block {
+  font-size: 10px;
+  margin: 0;
+  color: rgb(162, 6, 6);
+  font-family: "Montserrat Alternates", sans-serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
+  padding: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.feedback-delivered_block,
+.feedback-failed_block {
+  color: rgb(2, 139, 81);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 99;
+  width: 500px;
+  height: 150px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.598);
+  padding-bottom: 20px;
+  font-size: 25px;
+}
+.feedback-failed_block {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+@media screen and (max-width: 800px) {
+  .feedback-form-block {
+    width: 220px;
     height: fit-content;
-    margin: auto;
-    margin-bottom: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
-    padding-bottom: 20px;
-    transition: all 2s linear;
-  }
-  .feedback-block_form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .feedback-form_title {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-size: 18px;
-    color: rgb(2,139,81);
-  }
-  .feedback-form_close {
-    margin-left: auto;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-    cursor: pointer;
-  }
-  .feedback-form_label {
-    font-family: "Montserrat Alternates", sans-serif;
-    font-size: 18px;
-    color: rgb(2,139,81);
-    margin: 10px;
   }
   .feedback-form_input {
-    width: 250px;
-    height: 40px;
-    font-size: 20px;
-    font-family: "Poiret One", cursive;
-    color: rgb(2,139,81);
-    border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
-    border-radius: 4px;
-    font-weight: 700;
-    margin: 20px;
-  }
-  .feedback-form_input:focus {
-    outline: none;
-    background-color: rgba(2, 139, 82, 0.782);
-    color: rgb(253, 253, 253);
+    width: 200px;
+    height: 30px;
+    font-size: 12px;
   }
   .feedback-form_btn {
-    width: 200px;
-    height: 40px;
+    font-size: 14px;
+  }
+  .feedback-delivered_block {
+    width: 300px;
+    height: 100px;
     font-size: 20px;
-    color: rgb(2,139,81);
-    border:none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
-    cursor: pointer;
-    margin-top: 30px;
-    margin-bottom: 30px;
   }
-  .feedback-form_btn:hover {
-    background-color: rgb(255,255,255);
-    transition: 1s;
-  }
-  .validation-hint, .feedback-delivered_block {
-    font-size: 10px;
-    margin: 0;
-    color: rgb(162, 6, 6);
-    font-family: "Montserrat Alternates", sans-serif;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
-    padding: 8px;
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-  }
-  .feedback-delivered_block, .feedback-failed_block {
-    color: rgb(2,139,81);
-
-    background-color: beige;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 99;
-    width: 500px;
-    height: 150px;
-    margin: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.598);
-    padding-bottom: 20px;
-    font-size: 25px;
-  }
-  .feedback-failed_block {
-     font-size: 25px;
-     display: flex;
-     align-items: center;
-     text-align: center;
-     justify-content: center;
-     font-family: "Montserrat Alternates", sans-serif;
-  }
-  @media screen and (max-width: 800px){
-    .feedback-form-block {
-      width: 220px;
-      height: fit-content;
-    }
-    .feedback-form_input {
-      width: 200px;
-      height: 30px;
-      font-size: 12px;
-    }
-    .feedback-form_btn {
-      font-size: 14px;
-    }
-    .feedback-delivered_block {
-      width: 300px;
-      height: 100px;
-      font-size: 20px;
-    }
-  }
+}

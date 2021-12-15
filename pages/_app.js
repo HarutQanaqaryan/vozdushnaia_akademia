@@ -5,12 +5,9 @@ import "../components/styles/choose-us.css";
 import "../components/styles/slider.css";
 import "../components/styles/navbar.css";
 import { Provider } from "react-redux";
-import { compose, createStore } from "redux";
-import { reducer } from "../service/states-story";
+import { setupStore } from "../redux/store"
 
-const store = createStore(reducer, compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__()
-));
+const store = setupStore()
 
 function MyApp({ Component, pageProps }) {
   return (

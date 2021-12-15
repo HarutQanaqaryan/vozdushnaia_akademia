@@ -1,7 +1,7 @@
 .navbar-wrapper {
     background-color: rgb(255,255,255);
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    height: 150px;
+    height: 130px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 230px;
+    width: 200px;
     height: 30px;
     text-decoration: none;
     font-family: "Montserrat Alternates", sans-serif;
@@ -32,7 +32,7 @@
     transition: .1s;
   }
   .navbar-title {
-    font-size: 28px;
+    font-size: 24px;
     font-family: "Montserrat Alternates", sans-serif;
     font-weight: bold;
     color: rgb(2,139,81);
@@ -53,7 +53,7 @@
     transition: .1s;
   }
   .navbar-contacts_tel {
-    font-size: 14px;
+    font-size: 12px;
     font-family: "Montserrat Alternates", sans-serif;
     color: rgb(2,139,81);
   }

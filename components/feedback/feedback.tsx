@@ -1,68 +1,77 @@
-import React, { useState, useEffect, useCallback, useReducer } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import tick from "../../img/tick.svg";
 import error from "../../img/error.svg";
-import { patterns } from "../../service/regex-patterns";
 import { FeedBackUi } from "./feedback-render";
+import { feedBackSlice } from "../../redux/feedbackReducer";
+import { useAppDispatch, useAppSelector } from "../../redux/redux";
+import { patterns } from "../../service/regex-patterns";
+import { sendMessage } from "../../redux/actionCreators";
 
-const FeedbackForm = ({ onClick, callHomeMethod }) => {
-  const [name, setName] = useState({ text: "", isValid: false });
-  const [phone, setPhone] = useState({ text: "", isValid: false });
-  const [validInput, setValidInput] = useState(false);
-  const [isModal, setIsModal] = useState(true);
-  const [isDelivered, setIsDelivered] = useState(false);
-  const [isFailed, setIsFailed] = useState(false);
+const FeedbackForm = ({ onClick }) => {
+  const { name, phone, validInput, isForm, delivered, failed } = useAppSelector(
+    (state) => state.feedbackReducer
+  );
+  const { addName, addPhone, IsValidInput, isFormModal } =
+    feedBackSlice.actions;
+  const dispatch = useAppDispatch();
 
-  const checkInputs = ({ target: { value, id } }) => {
-    switch (id) {
-      case "name":
-        setName({ text: value, isValid: !patterns.name.test(value) });
-        break;
-      case "phone":
-        setPhone({ text: value, isValid: !patterns.phone.test(value) });
-        break;
-      default:
-        return;
-    }
-  };
+  const checkInputs = useCallback(
+    ({ target: { value, id } }) => {
+      switch (id) {
+        case "name":
+          dispatch(
+            addName({ text: value, isValid: !patterns.name.test(value) })
+          );
+          break;
+        case "phone":
+          dispatch(
+            addPhone({ text: value, isValid: !patterns.phone.test(value) })
+          );
+          break;
+        default:
+          return;
+      }
+    },
+    [addName, addPhone, dispatch]
+  );
 
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      const data = { name: name.text, phone: phone.text };
-      validInput &&
-        fetch("/api/contact", {
-          method: "post",
-          body: JSON.stringify(data),
-        })
-          .then((e) => {
-            e && setIsDelivered(true);
-            setIsModal(false);
-          })
-          .catch((e) => e && setIsFailed(true));
+      validInput && dispatch(sendMessage(name.text, phone.text));
     },
-    [name.text, phone.text, validInput]
+    [name.text, phone.text, validInput, dispatch]
   );
 
   useEffect(() => {
-    if (!name.text && !phone.text) {
-      setName({ text: name.text, isValid: false });
-      setPhone({ text: phone.text, isValid: false });
-    }
-  }, [name.text, phone.text]);
+    dispatch(isFormModal(true));
+  }, [dispatch, isFormModal]);
 
   useEffect(() => {
-    name.text && setValidInput(true);
-    phone.text && setValidInput(true);
-    name.isValid && setValidInput(false);
-    phone.isValid && setValidInput(false);
-  }, [name.text, phone.text, name.isValid, phone.isValid]);
+    if (name.text === "" && phone.text === "") {
+      dispatch(addName({ text: name.text, isValid: false }));
+      dispatch(addPhone({ text: phone.text, isValid: false }));
+    }
+  }, [addName, addPhone, dispatch, name.text, phone.text]);
 
- console.log(callHomeMethod)
+  useEffect(() => {
+    name.text && dispatch(IsValidInput(true));
+    phone.text && dispatch(IsValidInput(true));
+    name.isValid && dispatch(IsValidInput(false));
+    phone.isValid && dispatch(IsValidInput(false));
+  }, [
+    name.text,
+    phone.text,
+    name.isValid,
+    phone.isValid,
+    dispatch,
+    IsValidInput,
+  ]);
 
   return (
-    <>
-      {isModal && (
+    <div className="feedback_modal_opened">
+      {isForm && (
         <FeedBackUi
           onSubmit={handleSubmit}
           onChange={checkInputs}
@@ -71,19 +80,20 @@ const FeedbackForm = ({ onClick, callHomeMethod }) => {
           onClick={onClick}
         />
       )}
-      {isDelivered && (
+      {delivered && (
         <div className="feedback-delivered_block">
           <Image src={tick} alt="" width="90px" height="90px" />
           <span className="delivered-failed-hint">Отправлено!</span>
         </div>
       )}
-      {isFailed && (
+      {failed && (
         <div className="feedback-failed_block">
           <Image src={error} alt="" width="50px" height="50px" />
           <span>Что-то пошло не так, попробуйте через 5 минут!</span>
         </div>
       )}
-    </>
+    </div>
   );
 };
-export default React.memo(FeedbackForm);
+
+export default FeedbackForm;
