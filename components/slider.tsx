@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import FeedbackForm from "./feedback";
 import slide1 from "../img/slide1.jpg";
 import slide3 from "../img/slide3.jpg";
 import slide4 from "../img/slide4.jpg";

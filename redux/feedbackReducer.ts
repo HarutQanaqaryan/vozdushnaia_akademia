@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { patterns } from "../service/regex-patterns";
 
 export interface InitialStateTypes {
     name: { text: string, isValid: boolean },
@@ -9,6 +8,7 @@ export interface InitialStateTypes {
     delivered: boolean,
     failed: boolean,
     isOpenedModal: boolean,
+    isClosedModal: boolean,
 }
 
 
@@ -20,6 +20,7 @@ const initialState: InitialStateTypes = {
     delivered: false,
     failed: false,
     isOpenedModal: false,
+    isClosedModal: true,
 };
 
 
@@ -39,8 +40,17 @@ export const feedBackSlice = createSlice({
         isFormModal(state, action: PayloadAction<boolean>) {
             state.isForm = action.payload
         },
+        isDelivered(state, action: PayloadAction<boolean>) {
+            state.delivered = action.payload
+        },
+        isFailed(state, action: PayloadAction<boolean>) {
+            state.failed = action.payload
+        },
         modalOpen(state, action: PayloadAction<boolean>) {
             state.isOpenedModal = action.payload
+        },
+        modalClose(state, action: PayloadAction<boolean>){
+            state.isClosedModal = action.payload
         },
         sendMessageSucces(state, action: PayloadAction<boolean>){
             state.delivered = action.payload

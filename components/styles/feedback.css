@@ -1,5 +1,5 @@
 .feedback-form-block {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -14,20 +14,37 @@
   margin-bottom: 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.333);
   padding-bottom: 20px;
-  transition: all 2s linear;
+  opacity: 0;
+  animation: feedback_open .5s 1;
 }
-.feedback_modal_opened:before {
-	content: '';
-	background: rgba(0, 0, 0, 0.483);
+@keyframes feedback_open {
+  from {top: 0;}
+  to {opacity: 1;}
+}
+.feedback_modal_open{
+   opacity: 1;
+}
+.feedback_modal_close {
+  animation: feedback_close .5s 1;
+  opacity: 0;
+}
+@keyframes feedback_close {
+  from {opacity: 1;}
+  to {top: 0;}
+}
+
+.feedback_background {
+	background: rgba(0, 0, 0, 0.83);
 	position: fixed; 
 	left: 0;
 	top: 0;
 	width: 100%; 
 	height: 100%;
-	opacity: 0.7;
+	opacity: 0.8;
 	z-index: 1;
   overflow: hidden;
 }
+
 .feedback-block_form {
   display: flex;
   justify-content: center;
@@ -70,6 +87,12 @@
   background-color: rgba(2, 139, 82, 0.782);
   color: rgb(253, 253, 253);
 }
+
+.feedback-form_input::-webkit-outer-spin-button,
+.feedback-form_input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 .feedback-form_btn {
   width: 200px;
   height: 40px;
@@ -85,8 +108,7 @@
   background-color: rgb(255, 255, 255);
   transition: 1s;
 }
-.validation-hint,
-.feedback-delivered_block {
+.validation-hint {
   font-size: 10px;
   margin: 0;
   color: rgb(162, 6, 6);
@@ -108,6 +130,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Montserrat Alternates", sans-serif;
   z-index: 99;
   width: 500px;
   height: 150px;
@@ -115,6 +138,21 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.598);
   padding-bottom: 20px;
   font-size: 25px;
+  opacity: 0;
+  animation: delivered_open 1s 1;
+}
+@keyframes delivered_open {
+  from {top: 0;}
+  to {opacity: 1;}
+}
+
+.delivered_close {
+  animation: delivered_close 1s 1;
+  opacity: 0;
+}
+@keyframes delivered_close {
+  from {opacity: 1;}
+  to {top: 0;}
 }
 .feedback-failed_block {
   font-size: 25px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import Image from "next/image";
 import tick from "../../img/tick.svg";
 import error from "../../img/error.svg";
@@ -8,12 +8,24 @@ import { useAppDispatch, useAppSelector } from "../../redux/redux";
 import { patterns } from "../../service/regex-patterns";
 import { sendMessage } from "../../redux/actionCreators";
 
-const FeedbackForm = ({ onClick }) => {
-  const { name, phone, validInput, isForm, delivered, failed } = useAppSelector(
-    (state) => state.feedbackReducer
-  );
-  const { addName, addPhone, IsValidInput, isFormModal } =
-    feedBackSlice.actions;
+const FeedbackForm = ({ onClick, displayBlock, displayNone }) => {
+  const {
+    name,
+    phone,
+    validInput,
+    isForm,
+    delivered,
+    failed,
+    isClosedModal,
+  } = useAppSelector((state) => state.feedbackReducer);
+  const {
+    addName,
+    addPhone,
+    IsValidInput,
+    isFormModal,
+    modalOpen,
+    modalClose,
+  } = feedBackSlice.actions;
   const dispatch = useAppDispatch();
 
   const checkInputs = useCallback(
@@ -49,11 +61,13 @@ const FeedbackForm = ({ onClick }) => {
   }, [dispatch, isFormModal]);
 
   useEffect(() => {
-    if (name.text === "" && phone.text === "") {
+    if (name.text === "") {
       dispatch(addName({ text: name.text, isValid: false }));
+    }
+    if (phone.text === "") {
       dispatch(addPhone({ text: phone.text, isValid: false }));
     }
-  }, [addName, addPhone, dispatch, name.text, phone.text]);
+  }, [addName, addPhone, dispatch, name.text, phone.text, IsValidInput]);
 
   useEffect(() => {
     name.text && dispatch(IsValidInput(true));
@@ -69,8 +83,19 @@ const FeedbackForm = ({ onClick }) => {
     IsValidInput,
   ]);
 
+  const closeModalWindow = useCallback(() => {
+    dispatch(modalClose(true));
+    dispatch(modalOpen(false));
+  }, [dispatch, modalClose, modalOpen]);
+
   return (
-    <div className="feedback_modal_opened">
+    <>
+      {!isClosedModal && (
+        <div
+          className="feedback_background"
+          onClick={() => closeModalWindow()}
+        ></div>
+      )}
       {isForm && (
         <FeedBackUi
           onSubmit={handleSubmit}
@@ -78,10 +103,15 @@ const FeedbackForm = ({ onClick }) => {
           validName={name.isValid}
           validPhone={phone.isValid}
           onClick={onClick}
+          displayBlock={displayBlock}
+          displayNone={displayNone}
         />
       )}
+
       {delivered && (
-        <div className="feedback-delivered_block">
+        <div
+          className={`feedback-delivered_block ${isClosedModal && "delivered_close"}`}
+        >
           <Image src={tick} alt="" width="90px" height="90px" />
           <span className="delivered-failed-hint">Отправлено!</span>
         </div>
@@ -92,7 +122,7 @@ const FeedbackForm = ({ onClick }) => {
           <span>Что-то пошло не так, попробуйте через 5 минут!</span>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
